@@ -1,9 +1,12 @@
 import ButtonLogin from "@/components/ButtonLogin";
 
+
 export default function Home() {
 
   const isLoggedIn = true;
   const name = "Jay"
+
+  const pricingFeaturesList = ["Collect customer feeedback", "Unlimited baords", "Admin dashboard", "24/7 support",]
 
 
   return (
@@ -39,14 +42,42 @@ export default function Home() {
         <h2 className="text-3xl lg:text-4xl font-extrabold mb-12 text-center ">
           Pricing that adapts to your needs
         </h2>
-        <div className="p-8 bg-base-100 max-w-96 rounded-3xl mx-auto">
-          <div className="flex">
+        <div className="p-8 bg-base-100 max-w-96 rounded-3xl mx-auto space-y-6">
+          <div className="flex gap-2 items-baseline">
           <div className="text-4xl font-black">£19</div>
           <div className="uppercase text-sm font-medium opacity-60">/month</div>
         </div>
+
+        {/* pricing card */}
+
+        <ul className="space-y-2">
+          {
+            pricingFeaturesList.map(
+              (priceItem) => {
+                return <li className="flex gap-2 items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke-width="1.5" 
+                stroke="currentColor" 
+                class="size-6"
+                className="text-green-600 size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                {priceItem}</li>
+
+              }
+            )
+          }
+        
+        </ul>
+
+        < ButtonLogin isLoggedIn={isLoggedIn} name = {name} 
+        extraStyle="w-full"/>
       </div>
       </div>
       </section>
     </main>
   );
 }
+
