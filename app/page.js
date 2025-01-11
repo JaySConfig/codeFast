@@ -1,13 +1,11 @@
 import ButtonLogin from "@/components/ButtonLogin";
+import FAQListItem from "@/components/FAQListItem";
 
 
 export default function Home() {
 
   const isLoggedIn = true;
   const name = "Jay"
-
-  const pricingFeaturesList = ["Collect customer feeedback", "Unlimited baords", "Admin dashboard", "24/7 support",]
-
 
   return (
    <main>
@@ -52,9 +50,12 @@ export default function Home() {
 
         <ul className="space-y-2">
           {
-            pricingFeaturesList.map(
+            ["Collect customer feeedback", 
+            "Unlimited boards", 
+            "Admin dashboard", 
+            "24/7 support",].map(
               (priceItem) => {
-                return <li className="flex gap-2 items-center">
+                return <li className="flex gap-2 items-center " key={priceItem}>
                 <svg xmlns="http://www.w3.org/2000/svg" 
                 fill="none" 
                 viewBox="0 0 24 24" 
@@ -77,6 +78,32 @@ export default function Home() {
       </div>
       </div>
       </section>
+
+      {/* FAQ */}
+
+      <section className="bg-base-200">
+      <div className="py-32 px-8 max-w-3xl mx-auto">
+          <p className="text-sm uppercase font-medium text-center text-primary mb-4">FAQ</p>
+          <h2 className="text-3xl lg:text-4xl font-extrabold mb-12 text-center ">
+            Frequently Asked Questions
+          </h2>
+          <ul>
+            {
+              [
+                {question: "I have question", answer: "What is the answer",
+                question: "I need to ask a question", answer: "What is the answer",
+                question: "I must ask you a question", answer: "What is the answer"
+              }
+              ].map((qa) => (
+                
+
+                <FAQListItem key={qa.question} qa={qa}/>
+              ))
+            }
+          </ul>
+          
+          </div>
+        </section>
     </main>
   );
 }
