@@ -4,10 +4,20 @@ import Image from "next/image";
 import productDemo from "@/app/productDemo.jpeg";
 
 
+
+
+
+
 export default function Home() {
 
   const isLoggedIn = true;
   const name = "Jay"
+
+  console.log(process.env.NEXT_PUBLIC_MONGO_URI);
+
+  console.log(process.env.MONGO_URI);
+
+  const surname = "geoff"
 
   return (
    <main>
@@ -29,7 +39,7 @@ export default function Home() {
     {/* hero */}
       <section className="text-center lg:text-left py-32 px-8 max-w-5xl mx-auto flex flex-col lg:flex-row gap-14 items-center lg:items-start">
 
-        <Image src={productDemo} alt="Product demo" className="w-96 rounded-xl saturate-200" />
+        <Image src={productDemo} alt="Product demo" className="w-96 rounded-xl" />
 
         <div>
           <h1 className="text-4xl font-extrabold mb-6">Collect customer feedback to build better products</h1>
