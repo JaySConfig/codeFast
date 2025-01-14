@@ -36,8 +36,6 @@ const FAQListItem = ({qa}) => {
 
                   </button>
 
-                  
-
                   {/* Answer */}
                   {
                     <div className={`${isOpen ? "block" : "hidden"} mt-3 mb-6 opacity-90`}>{qa.answer}</div>

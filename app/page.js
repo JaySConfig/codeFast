@@ -13,12 +13,6 @@ export default function Home() {
   const isLoggedIn = true;
   const name = "Jay"
 
-  console.log(process.env.NEXT_PUBLIC_MONGO_URI);
-
-  console.log(process.env.MONGO_URI);
-
-  const surname = "geoff"
-
   return (
    <main>
 

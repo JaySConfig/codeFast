@@ -6,5 +6,8 @@
   font-size: 48px;
   font-weight: 800;
   text-align: center;
+}
 
+.extra-space {
+  padding: 32px ;
 }
