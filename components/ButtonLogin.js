@@ -1,19 +1,25 @@
 import Link from "next/link";
 
 
-const ButtonLogin = ({isLoggedIn, name, extraStyle}) => {
+const ButtonLogin = ({session, extraStyle}) => {
     console.log(extraStyle)
 
 
-    if(isLoggedIn){
-        console.log("welcome", name)
+    if(session){
+        
 
         return <Link href="/dashboard" className={`btn btn-primary ${extraStyle ? extraStyle : ""} `}>
-            <p>Welcome back {name} </p>
+            <p>Welcome back {session.user.name} </p>
             </Link>;
     }
 
     return <button>Login</button>;
+
+    // create login page
+
+    // create email/passowrd form
+
+    // make a post request to api/auth
     
 };
 
