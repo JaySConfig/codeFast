@@ -5,13 +5,11 @@ import { signIn } from "next-auth/react";
 
 
 const ButtonLogin = ({session, extraStyle}) => {
-    console.log(extraStyle)
     const dashboardUrl = "/dashboard";
 
 
     if(session){
         
-
         return <Link 
         href={dashboardUrl} 
         className={`btn btn-primary ${extraStyle ? extraStyle : ""} `}>
