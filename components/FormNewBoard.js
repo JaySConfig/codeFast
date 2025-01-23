@@ -28,8 +28,12 @@ const FormNewBoard = () => {
 
 
         } catch (error)
-        { const errorMessage = error.response.data.error || error.message || "Something went wrong"
-            toast.error(errorMessage)
+        { const errorMessage = 
+            error.response?.data.error || 
+            error.message || 
+            "Something went wrong"
+
+            toast.error(errorMessage);
         } finally {
             setIsLoading(false)
         }

@@ -4,6 +4,7 @@ import FormNewBoard from "@/components/FormNewBoard";
 import { auth } from "@/auth";
 import connectMongo from "@/libs/mongoose";
 import User from "@/models/User";
+import ButtonCheckout from "@/components/ButtonCheckout";
 
 
 async function getUser() {
@@ -25,9 +26,11 @@ export default async function Dashboard() {
 
   return (
    <main className="bg-base-200 min-h-screen">
-      
+      {/* HEADER */}
       <section className="bg-base-100 ">
-      <div className="max-w-5xl mx-auto px-5 py-3 flex justify-end"> 
+      <div className="max-w-5xl mx-auto px-5 py-3 flex justify-between"> 
+       
+      { !user.hasAccess && <ButtonCheckout />}
       <ButtonLogout />
       </div>
       </section>

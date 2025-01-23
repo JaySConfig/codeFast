@@ -83,6 +83,13 @@ export async function POST(req){
         const user = await User.findById(session.user.id);
         console.log("user", user);
 
+        if (!user.hasAccess){
+            return NextResponse.json(
+                { error: "Please subscribe first"},
+                { status: 403 }
+            );
+        }
+
         // Create board using new + save instead of create
         const board = new Board({
             userId: user._id,
@@ -122,11 +129,7 @@ export async function DELETE(req) {
 
         await connectMongo(); // Ensure database connection
 
-        // Delete the board
-        const result = await Board.deleteOne({
-            _id: boardId,
-            userId: session.user.id,
-        });
+       
 
         if (result.deletedCount === 0) {
             return NextResponse.json(
@@ -137,6 +140,20 @@ export async function DELETE(req) {
 
         // Update the user document
         const user = await User.findById(session.user.id);
+
+        if (!user.hasAccess){
+            return NextResponse.json(
+                { error: "Please subscribe first"},
+                { status: 403 }
+            );
+        }
+
+         // Delete the board
+         const result = await Board.deleteOne({
+            _id: boardId,
+            userId: session.user.id,
+        });
+
         user.boards = user.boards.filter((id) => id.toString() !== boardId);
         await user.save();
 

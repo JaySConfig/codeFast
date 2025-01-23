@@ -26,7 +26,7 @@ const CardBoardLink = ( { boardId }) => {
         </svg>
 
 
-</button>
+            </button>
         </div>
 };
 

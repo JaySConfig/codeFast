@@ -6,7 +6,6 @@ import Link from "next/link";
 import CardBoardLink from "@/components/CardBoardLink";
 import ButtonDeleteBoard from "@/components/ButtonDeleteBoard";
 
-
 const getBoard = async (boardId) => {
     const session = await auth();
 
