@@ -102,35 +102,48 @@ export async function POST(req){
 
 export async function DELETE(req) {
     try {
-        const { searchParams } = req.nextUrl;
+        const { searchParams } = new URL(req.url); // Correct way to parse query parameters
         const boardId = searchParams.get("boardId");
 
         if (!boardId) {
             return NextResponse.json(
-                { error: "boardId is required"},
-                { status: 400}
+                { error: "boardId is required" },
+                { status: 400 }
             );
         }
 
-        const session = await auth()
-
+        const session = await auth();
         if (!session) {
             return NextResponse.json(
                 { error: "Not authorised" },
-                { status: 401}
+                { status: 401 }
             );
         }
 
-        await Board.deleteOne({
+        await connectMongo(); // Ensure database connection
+
+        // Delete the board
+        const result = await Board.deleteOne({
             _id: boardId,
-            userId: session?.user?.id,
+            userId: session.user.id,
         });
 
-        const user = await User.findById(session?.user?.id);
+        if (result.deletedCount === 0) {
+            return NextResponse.json(
+                { error: "Board not found or not authorised to delete" },
+                { status: 404 }
+            );
+        }
 
+        // Update the user document
+        const user = await User.findById(session.user.id);
         user.boards = user.boards.filter((id) => id.toString() !== boardId);
+        await user.save();
 
+        // Return success response
+        return NextResponse.json({ success: true });
     } catch (e) {
-        return NextResponse.json({ error: e.message }, { status: 500});
+        console.error("DELETE Error:", e);
+        return NextResponse.json({ error: e.message }, { status: 500 });
     }
 }
