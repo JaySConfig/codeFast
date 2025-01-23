@@ -32,6 +32,15 @@ export async function POST(res) {
             user.customerId = data.object.customer;
 
             await user.save()
+        } else if (type === "customer.subscription.deleted") {
+        
+            await connectMongo();
+
+            const user = await User.findOne({
+                customerId: data.object.customer,
+            })
+
+            user.hasAccess = false;
         }
 
     } catch (e) 
